@@ -31,7 +31,7 @@ export const defaultConfig: SpotlightConfig = {
   color: "#ffffff",
   speed: 0.8,
   spread: 0.5,
-  length: 4.0,
+  length: 4,
   width: 0.15,
   pulsating: [0.95, 1.1],
   distance: 3.5,
@@ -63,7 +63,7 @@ interface SpotlightProps {
 
 const hexToRgb = (hex: string): [number, number, number] => {
   const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-  return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [1, 1, 1]
+  return m ? [Number.parseInt(m[1], 16) / 255, Number.parseInt(m[2], 16) / 255, Number.parseInt(m[3], 16) / 255] : [1, 1, 1]
 }
 
 const getAnchorAndDir = (
@@ -788,7 +788,7 @@ export default function Spotlight(props: SpotlightProps) {
     uniformDataRef.lightSpread = config.spread
     uniformDataRef.lightLength = config.length
     uniformDataRef.sourceWidth = config.width
-    uniformDataRef.pulsating = config.pulsating !== false ? 1.0 : 0.0
+    uniformDataRef.pulsating = config.pulsating !== false ? 1 : 0
     uniformDataRef.pulsatingMin = config.pulsating !== false ? config.pulsating[0] : 1.0
     uniformDataRef.pulsatingMax = config.pulsating !== false ? config.pulsating[1] : 1.0
     uniformDataRef.fadeDistance = config.distance
