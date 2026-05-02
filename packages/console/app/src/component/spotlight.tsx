@@ -63,7 +63,7 @@ interface SpotlightProps {
 
 const hexToRgb = (hex: string): [number, number, number] => {
   const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-  return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [1, 1, 1]
+  return m ? [Number.parseInt(m[1], 16) / 255, Number.parseInt(m[2], 16) / 255, Number.parseInt(m[3], 16) / 255] : [1, 1, 1]
 }
 
 const getAnchorAndDir = (
@@ -102,7 +102,7 @@ const getAnchorAndDir = (
     dirY = 1
   }
 
-  const len = Math.sqrt(dirX * dirX + dirY * dirY)
+  const len = Math.hypot(dirX, dirY)
   if (len > 0) {
     dirX /= len
     dirY /= len
@@ -789,8 +789,8 @@ export default function Spotlight(props: SpotlightProps) {
     uniformDataRef.lightLength = config.length
     uniformDataRef.sourceWidth = config.width
     uniformDataRef.pulsating = config.pulsating !== false ? 1.0 : 0.0
-    uniformDataRef.pulsatingMin = config.pulsating !== false ? config.pulsating[0] : 1.0
-    uniformDataRef.pulsatingMax = config.pulsating !== false ? config.pulsating[1] : 1.0
+    uniformDataRef.pulsatingMin = config.pulsating === false ? 1 : config.pulsating[0]
+    uniformDataRef.pulsatingMax = config.pulsating === false ? 1 : config.pulsating[1]
     uniformDataRef.fadeDistance = config.distance
     uniformDataRef.saturation = config.saturation
     uniformDataRef.noiseAmount = config.noiseAmount
