@@ -1,5 +1,5 @@
 import { describe, expect } from "bun:test"
-import path from "path"
+import path from "node:path"
 import { Effect, Exit, Layer } from "effect"
 import { AppFileSystem } from "@opencode-ai/core/filesystem"
 import { CrossSpawnSpawner } from "@opencode-ai/core/cross-spawn-spawner"
