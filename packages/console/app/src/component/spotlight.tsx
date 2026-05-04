@@ -444,7 +444,7 @@ function updateUniformBuffer(buffer: Float32Array, data: UniformData): void {
   buffer[28] = data.particleDrift
 }
 
-export default function Spotlight(props: SpotlightProps) {
+export default function Spotlight(props: Readonly<SpotlightProps>) {
   let containerRef: HTMLDivElement | undefined
   let canvasRef: HTMLCanvasElement | null = null
   let deviceRef: GPUDevice | null = null
@@ -630,14 +630,14 @@ export default function Spotlight(props: SpotlightProps) {
         lightSpread: config.spread,
         lightLength: config.length,
         sourceWidth: config.width,
-        pulsating: config.pulsating !== false ? 1.0 : 0.0,
-        pulsatingMin: config.pulsating !== false ? config.pulsating[0] : 1.0,
-        pulsatingMax: config.pulsating !== false ? config.pulsating[1] : 1.0,
+        pulsating: config.pulsating === false ? 0 : 1,
+        pulsatingMin: config.pulsating === false ? 1 : config.pulsating[0],
+        pulsatingMax: config.pulsating === false ? 1 : config.pulsating[1],
         fadeDistance: config.distance,
         saturation: config.saturation,
         noiseAmount: config.noiseAmount,
         distortion: config.distortion,
-        particlesEnabled: config.particles.enabled ? 1.0 : 0.0,
+        particlesEnabled: config.particles.enabled ? 1 : 0,
         particleAmount: config.particles.amount,
         particleSizeMin: config.particles.size[0],
         particleSizeMax: config.particles.size[1],
@@ -788,14 +788,14 @@ export default function Spotlight(props: SpotlightProps) {
     uniformDataRef.lightSpread = config.spread
     uniformDataRef.lightLength = config.length
     uniformDataRef.sourceWidth = config.width
-    uniformDataRef.pulsating = config.pulsating !== false ? 1.0 : 0.0
-    uniformDataRef.pulsatingMin = config.pulsating !== false ? config.pulsating[0] : 1.0
-    uniformDataRef.pulsatingMax = config.pulsating !== false ? config.pulsating[1] : 1.0
+    uniformDataRef.pulsating = config.pulsating === false ? 0 : 1
+    uniformDataRef.pulsatingMin = config.pulsating === false ? 1 : config.pulsating[0]
+    uniformDataRef.pulsatingMax = config.pulsating === false ? 1 : config.pulsating[1]
     uniformDataRef.fadeDistance = config.distance
     uniformDataRef.saturation = config.saturation
     uniformDataRef.noiseAmount = config.noiseAmount
     uniformDataRef.distortion = config.distortion
-    uniformDataRef.particlesEnabled = config.particles.enabled ? 1.0 : 0.0
+    uniformDataRef.particlesEnabled = config.particles.enabled ? 1 : 0
     uniformDataRef.particleAmount = config.particles.amount
     uniformDataRef.particleSizeMin = config.particles.size[0]
     uniformDataRef.particleSizeMax = config.particles.size[1]
