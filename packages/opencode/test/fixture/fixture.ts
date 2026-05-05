@@ -1,5 +1,5 @@
 import { $ } from "bun"
-import * as fs from "fs/promises"
+import * as fs from "node:fs/promises"
 import os from "os"
 import path from "path"
 import { Effect, Context } from "effect"

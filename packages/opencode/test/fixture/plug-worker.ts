@@ -1,4 +1,4 @@
-import path from "path"
+import path from "node:path"
 
 import { createPlugTask, type PlugCtx, type PlugDeps } from "../../src/cli/cmd/plug"
 import { Filesystem } from "@/util/filesystem"
