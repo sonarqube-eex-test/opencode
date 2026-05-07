@@ -632,12 +632,12 @@ export default function Spotlight(props: SpotlightProps) {
         sourceWidth: config.width,
         pulsating: config.pulsating !== false ? 1.0 : 0.0,
         pulsatingMin: config.pulsating !== false ? config.pulsating[0] : 1.0,
-        pulsatingMax: config.pulsating !== false ? config.pulsating[1] : 1.0,
+        pulsatingMax: config.pulsating !== false ? config.pulsating[1] : 1,
         fadeDistance: config.distance,
         saturation: config.saturation,
         noiseAmount: config.noiseAmount,
         distortion: config.distortion,
-        particlesEnabled: config.particles.enabled ? 1.0 : 0.0,
+        particlesEnabled: config.particles.enabled ? 1 : 0,
         particleAmount: config.particles.amount,
         particleSizeMin: config.particles.size[0],
         particleSizeMax: config.particles.size[1],
@@ -676,14 +676,13 @@ export default function Spotlight(props: SpotlightProps) {
         frameCount++
 
         if (props.onAnimationFrame && frameCount % 2 === 0) {
-          const pulsatingMin = configRef.pulsating !== false ? configRef.pulsating[0] : 1.0
-          const pulsatingMax = configRef.pulsating !== false ? configRef.pulsating[1] : 1.0
+          const pulsatingMin = configRef.pulsating ? configRef.pulsating[0] : 1
+          const pulsatingMax = configRef.pulsating ? configRef.pulsating[1] : 1
           const pulseCenter = (pulsatingMin + pulsatingMax) * 0.5
           const pulseAmplitude = (pulsatingMax - pulsatingMin) * 0.5
-          const pulseValue =
-            configRef.pulsating !== false
-              ? pulseCenter + pulseAmplitude * Math.sin(timeSeconds * configRef.speed * 3.0)
-              : 1.0
+          const pulseValue = configRef.pulsating
+            ? pulseCenter + pulseAmplitude * Math.sin(timeSeconds * configRef.speed * 3)
+            : 1
 
           const baseIntensity1 = 0.45 + 0.15 * Math.sin(timeSeconds * configRef.speed * 1.5)
           const baseIntensity2 = 0.3 + 0.2 * Math.cos(timeSeconds * configRef.speed * 1.1)
