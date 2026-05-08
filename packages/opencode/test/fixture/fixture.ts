@@ -1,7 +1,7 @@
 import { $ } from "bun"
 import * as fs from "fs/promises"
-import os from "os"
-import path from "path"
+import os from "node:os"
+import path from "node:path"
 import { Effect, Context } from "effect"
 import type * as PlatformError from "effect/PlatformError"
 import type * as Scope from "effect/Scope"
@@ -13,7 +13,7 @@ import { TestLLMServer } from "../lib/llm-server"
 
 // Strip null bytes from paths (defensive fix for CI environment issues)
 function sanitizePath(p: string): string {
-  return p.replace(/\0/g, "")
+  return p.replaceAll("\0", "")
 }
 
 function exists(dir: string) {
