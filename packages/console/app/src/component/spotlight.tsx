@@ -676,14 +676,14 @@ export default function Spotlight(props: SpotlightProps) {
         frameCount++
 
         if (props.onAnimationFrame && frameCount % 2 === 0) {
-          const pulsatingMin = configRef.pulsating !== false ? configRef.pulsating[0] : 1.0
-          const pulsatingMax = configRef.pulsating !== false ? configRef.pulsating[1] : 1.0
+          const pulsatingMin = configRef.pulsating === false ? 1 : configRef.pulsating[0]
+          const pulsatingMax = configRef.pulsating === false ? 1 : configRef.pulsating[1]
           const pulseCenter = (pulsatingMin + pulsatingMax) * 0.5
           const pulseAmplitude = (pulsatingMax - pulsatingMin) * 0.5
           const pulseValue =
-            configRef.pulsating !== false
-              ? pulseCenter + pulseAmplitude * Math.sin(timeSeconds * configRef.speed * 3.0)
-              : 1.0
+            configRef.pulsating === false
+              ? 1
+              : pulseCenter + pulseAmplitude * Math.sin(timeSeconds * configRef.speed * 3)
 
           const baseIntensity1 = 0.45 + 0.15 * Math.sin(timeSeconds * configRef.speed * 1.5)
           const baseIntensity2 = 0.3 + 0.2 * Math.cos(timeSeconds * configRef.speed * 1.1)
