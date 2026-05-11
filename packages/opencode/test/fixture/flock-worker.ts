@@ -1,4 +1,4 @@
-import fs from "fs/promises"
+import fs from "node:fs/promises"
 import { Flock } from "@opencode-ai/core/util/flock"
 
 type Msg = {
