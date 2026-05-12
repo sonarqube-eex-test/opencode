@@ -1,5 +1,5 @@
 import { afterEach, test, expect } from "bun:test"
-import os from "os"
+import os from "node:os"
 import { Cause, Effect, Exit, Fiber, Layer } from "effect"
 import { Bus } from "../../src/bus"
 import { CrossSpawnSpawner } from "@opencode-ai/core/cross-spawn-spawner"

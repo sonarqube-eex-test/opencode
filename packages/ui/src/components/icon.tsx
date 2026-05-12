@@ -110,7 +110,7 @@ export interface IconProps extends ComponentProps<"svg"> {
   size?: "small" | "normal" | "medium" | "large"
 }
 
-export function Icon(props: IconProps) {
+export function Icon(props: Readonly<IconProps>) {
   const [local, others] = splitProps(props, ["name", "size", "class", "classList"])
   const viewBox = () =>
     local.name === "magnifying-glass" || local.name === "arrow-undo-down" ? "0 0 16 16" : "0 0 20 20"
