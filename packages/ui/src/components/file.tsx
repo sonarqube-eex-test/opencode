@@ -274,7 +274,7 @@ function useFileViewer(config: ViewerConfig) {
   const handleSelectionChange = () => {
     if (!config.enableLineSelection()) return
     if (dragStart === undefined) return
-    const selection = window.getSelection()
+    const selection = globalThis.getSelection()
     if (!selection || selection.isCollapsed) return
     scheduleSelectionUpdate()
   }
@@ -304,7 +304,7 @@ function useFileViewer(config: ViewerConfig) {
 
     makeEventListener(container, "mousedown", handleMouseDown)
     makeEventListener(container, "mousemove", handleMouseMove)
-    makeEventListener(window, "mouseup", handleMouseUp)
+    makeEventListener(globalThis, "mouseup", handleMouseUp)
     makeEventListener(document, "selectionchange", handleSelectionChange)
   })
 
@@ -592,7 +592,7 @@ function createSharedVirtualStrategy(host: () => HTMLDivElement | undefined): Vi
 
 function parseLine(node: HTMLElement) {
   if (!node.dataset.line) return
-  const value = parseInt(node.dataset.line, 10)
+  const value = Number.parseInt(node.dataset.line, 10)
   if (Number.isNaN(value)) return
   return value
 }
@@ -611,7 +611,7 @@ function mouseHit(
     if (!(item instanceof HTMLElement)) continue
 
     numberColumn = numberColumn || item.dataset.columnNumber != null
-    if (value === undefined) value = line(item)
+    value ??= line(item)
     if (branch === undefined && side) branch = side(item)
 
     if (numberColumn && value !== undefined && (side == null || branch !== undefined)) break
@@ -642,12 +642,12 @@ function diffSelectionSide(node: Node | null) {
 // Shared JSX shell
 // ---------------------------------------------------------------------------
 
-function ViewerShell(props: {
+function ViewerShell(props: Readonly<{
   mode: "text" | "diff"
   viewer: ReturnType<typeof useFileViewer>
   class: string | undefined
   classList: ComponentProps<"div">["classList"] | undefined
-}) {
+}>) {
   return (
     <div
       data-component="file"
