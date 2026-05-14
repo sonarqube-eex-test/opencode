@@ -212,7 +212,7 @@ export function List<T>(props: ListProps<T> & { ref?: (ref: ListRef) => void }) 
     )
   }
 
-  function GroupHeader(groupProps: { group: { category: string; items: T[] } }): JSX.Element {
+  function GroupHeader(groupProps: Readonly<{ group: { category: string; items: T[] } }>): JSX.Element {
     const [state, setState] = createStore({
       stuck: false,
       header: undefined as HTMLDivElement | undefined,

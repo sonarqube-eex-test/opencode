@@ -18,7 +18,7 @@ const pct = (value: number | undefined, fallback: number) => {
   return `${v}%`
 }
 
-export function TextReveal(props: {
+export function TextReveal(props: Readonly<{
   text?: string
   class?: string
   duration?: number | string
@@ -30,7 +30,7 @@ export function TextReveal(props: {
   springSoft?: string
   growOnly?: boolean
   truncate?: boolean
-}) {
+}>) {
   const [state, setState] = createStore({
     cur: props.text,
     old: undefined as string | undefined,
@@ -93,7 +93,7 @@ export function TextReveal(props: {
 
   onMount(() => {
     widen(win())
-    const fonts = typeof document !== "undefined" ? document.fonts : undefined
+    const fonts = typeof document === "undefined" ? undefined : document.fonts
     if (typeof requestAnimationFrame !== "function") {
       setState("ready", true)
       return

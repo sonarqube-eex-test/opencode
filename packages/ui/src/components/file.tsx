@@ -699,7 +699,7 @@ function TextViewer<T>(props: TextFileProps<T>) {
     if (Array.isArray(value)) return value.join("\n")
     if (value == null) return ""
     // oxlint-disable-next-line no-base-to-string -- file contents cast to unknown, coercion is intentional
-    return String(value)
+    return JSON.stringify(value) ?? ""
   }
 
   const lineCount = () => {
@@ -720,7 +720,7 @@ function TextViewer<T>(props: TextFileProps<T>) {
     }
     if (value == null) return 0
     // oxlint-disable-next-line no-base-to-string -- file contents cast to unknown, coercion is intentional
-    return String(value).length
+    return (JSON.stringify(value) ?? "").length
   })
 
   const virtual = createMemo(() => bytes() > VIRTUALIZE_BYTES)
