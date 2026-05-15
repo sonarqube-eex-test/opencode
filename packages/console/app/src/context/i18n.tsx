@@ -5,7 +5,7 @@ import { useLanguage } from "~/context/language"
 
 function resolve(text: string, params?: Record<string, string | number>) {
   if (!params) return text
-  return text.replace(/\{\{(\w+)\}\}/g, (raw, key) => {
+  return text.replaceAll(/\{\{(\w+)\}\}/g, (raw, key) => {
     const value = params[key]
     if (value === undefined || value === null) return raw
     return String(value)

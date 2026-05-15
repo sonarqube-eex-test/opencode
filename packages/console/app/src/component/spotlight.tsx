@@ -697,9 +697,7 @@ export default function Spotlight(props: SpotlightProps) {
         }
 
         try {
-          if (!uniformArrayRef) {
-            uniformArrayRef = new Float32Array(36)
-          }
+          uniformArrayRef ??= new Float32Array(36)
           updateUniformBuffer(uniformArrayRef, uniformDataRef)
           deviceRef.queue.writeBuffer(uniformBufferRef, 0, uniformArrayRef.buffer)
 
@@ -788,7 +786,7 @@ export default function Spotlight(props: SpotlightProps) {
     uniformDataRef.lightSpread = config.spread
     uniformDataRef.lightLength = config.length
     uniformDataRef.sourceWidth = config.width
-    uniformDataRef.pulsating = config.pulsating !== false ? 1.0 : 0.0
+    uniformDataRef.pulsating = config.pulsating === false ? 0.0 : 1.0
     uniformDataRef.pulsatingMin = config.pulsating !== false ? config.pulsating[0] : 1.0
     uniformDataRef.pulsatingMax = config.pulsating !== false ? config.pulsating[1] : 1.0
     uniformDataRef.fadeDistance = config.distance
