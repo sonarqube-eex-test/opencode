@@ -8,6 +8,8 @@ import type { PtyID } from "../../src/pty/schema"
 import { tmpdir } from "../fixture/fixture"
 import { setTimeout as sleep } from "node:timers/promises"
 
+type PtyLogEntry = { type: "created" | "exited" | "deleted"; id: PtyID }
+
 const wait = async (fn: () => boolean, ms = 5000) => {
   const end = Date.now() + ms
   while (Date.now() < end) {
@@ -17,7 +19,7 @@ const wait = async (fn: () => boolean, ms = 5000) => {
   throw new Error("timeout waiting for pty events")
 }
 
-const pick = (log: Array<{ type: "created" | "exited" | "deleted"; id: PtyID }>, id: PtyID) => {
+const pick = (log: Array<PtyLogEntry>, id: PtyID) => {
   return log.filter((evt) => evt.id === id).map((evt) => evt.type)
 }
 
@@ -33,7 +35,7 @@ describe("pty", () => {
         AppRuntime.runPromise(
           Effect.gen(function* () {
             const pty = yield* Pty.Service
-            const log: Array<{ type: "created" | "exited" | "deleted"; id: PtyID }> = []
+            const log: Array<PtyLogEntry> = []
             const off = [
               Bus.subscribe(Pty.Event.Created, (evt) => log.push({ type: "created", id: evt.properties.info.id })),
               Bus.subscribe(Pty.Event.Exited, (evt) => log.push({ type: "exited", id: evt.properties.id })),
@@ -49,11 +51,11 @@ describe("pty", () => {
               })
               id = info.id
 
-              yield* Effect.promise(() => wait(() => pick(log, id!).includes("exited")))
+              yield* Effect.promise(() => wait(() => pick(log, id).includes("exited")))
 
               yield* pty.remove(id)
-              yield* Effect.promise(() => wait(() => pick(log, id!).length >= 3))
-              expect(pick(log, id!)).toEqual(["created", "exited", "deleted"])
+              yield* Effect.promise(() => wait(() => pick(log, id).length >= 3))
+              expect(pick(log, id)).toEqual(["created", "exited", "deleted"])
             } finally {
               off.forEach((x) => x())
               if (id) yield* pty.remove(id)
@@ -74,7 +76,7 @@ describe("pty", () => {
         AppRuntime.runPromise(
           Effect.gen(function* () {
             const pty = yield* Pty.Service
-            const log: Array<{ type: "created" | "exited" | "deleted"; id: PtyID }> = []
+            const log: Array<PtyLogEntry> = []
             const off = [
               Bus.subscribe(Pty.Event.Created, (evt) => log.push({ type: "created", id: evt.properties.info.id })),
               Bus.subscribe(Pty.Event.Exited, (evt) => log.push({ type: "exited", id: evt.properties.id })),
