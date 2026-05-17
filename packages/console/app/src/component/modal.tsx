@@ -8,11 +8,11 @@ interface ModalProps {
   children: JSX.Element
 }
 
-export function Modal(props: ModalProps) {
+export function Modal(props: Readonly<ModalProps>) {
   return (
     <Show when={props.open}>
-      <div data-component="modal" data-slot="overlay" onClick={props.onClose}>
-        <div data-slot="content" onClick={(e) => e.stopPropagation()}>
+      <div data-component="modal" data-slot="overlay" onClick={props.onClose} onKeyDown={(e) => { if (e.key === "Escape") props.onClose(); }}>
+        <div data-slot="content" onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
           <Show when={props.title}>
             <h2 data-slot="title">{props.title}</h2>
           </Show>

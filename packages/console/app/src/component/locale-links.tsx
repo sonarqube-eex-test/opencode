@@ -18,7 +18,7 @@ function skip(path: string) {
   return false
 }
 
-export function LocaleLinks(props: { path: string }) {
+export function LocaleLinks(props: Readonly<{ path: string }>) {
   const language = useLanguage()
   if (skip(props.path)) return null
 
