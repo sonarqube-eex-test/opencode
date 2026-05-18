@@ -242,7 +242,7 @@ function createOpencode() {
 }
 
 function assertPayloadKeyword() {
-  const payload = useContext().payload as IssueCommentEvent | PullRequestReviewCommentEvent
+  const payload = useContext().payload
   const body = payload.comment.body.trim()
   if (!body.match(/(?:^|\s)(?:\/opencode|\/oc)(?=$|\s)/)) {
     throw new Error("Comments must mention `/opencode` or `/oc`")
@@ -353,8 +353,8 @@ function isPullRequest() {
   return Boolean(payload.issue.pull_request)
 }
 
-function useContext() {
-  return isMock() ? (JSON.parse(useEnvMock().mockEvent!) as GitHubContext) : github.context
+function useContext(): GitHubContext {
+  return isMock() ? JSON.parse(useEnvMock().mockEvent) : github.context
 }
 
 function useIssueId() {
@@ -413,7 +413,7 @@ async function createComment() {
 
 async function getUserPrompt() {
   const context = useContext()
-  const payload = context.payload as IssueCommentEvent | PullRequestReviewCommentEvent
+  const payload = context.payload
   const reviewContext = getReviewCommentContext()
 
   let prompt = (() => {
