@@ -89,8 +89,8 @@ describe("pty", () => {
               yield* Effect.promise(() => sleep(100))
 
               yield* pty.remove(id)
-              yield* Effect.promise(() => wait(() => pick(log, id!).length >= 3))
-              expect(pick(log, id!)).toEqual(["created", "exited", "deleted"])
+              yield* Effect.promise(() => wait(() => pick(log, id).length >= 3))
+              expect(pick(log, id)).toEqual(["created", "exited", "deleted"])
             } finally {
               off.forEach((x) => x())
               if (id) yield* pty.remove(id)

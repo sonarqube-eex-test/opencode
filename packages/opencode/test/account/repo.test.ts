@@ -40,7 +40,7 @@ it.live("persistAccount inserts and getRow retrieves", () =>
         url: "https://control.example.com",
         accessToken: AccessToken.make("at_123"),
         refreshToken: RefreshToken.make("rt_456"),
-        expiry: Date.now() + 3600_000,
+        expiry: Date.now() + 3_600_000,
         orgID: Option.some(OrgID.make("org-1")),
       }),
     )
@@ -67,7 +67,7 @@ it.live("persistAccount normalizes trailing slashes in stored server URLs", () =
         url: "https://control.example.com/",
         accessToken: AccessToken.make("at_123"),
         refreshToken: RefreshToken.make("rt_456"),
-        expiry: Date.now() + 3600_000,
+        expiry: Date.now() + 3_600_000,
         orgID: Option.none(),
       }),
     )
@@ -94,7 +94,7 @@ it.live("persistAccount sets the active account and org", () =>
         url: "https://control.example.com",
         accessToken: AccessToken.make("at_1"),
         refreshToken: RefreshToken.make("rt_1"),
-        expiry: Date.now() + 3600_000,
+        expiry: Date.now() + 3_600_000,
         orgID: Option.some(OrgID.make("org-1")),
       }),
     )
@@ -106,7 +106,7 @@ it.live("persistAccount sets the active account and org", () =>
         url: "https://control.example.com",
         accessToken: AccessToken.make("at_2"),
         refreshToken: RefreshToken.make("rt_2"),
-        expiry: Date.now() + 3600_000,
+        expiry: Date.now() + 3_600_000,
         orgID: Option.some(OrgID.make("org-2")),
       }),
     )
@@ -131,7 +131,7 @@ it.live("list returns all accounts", () =>
         url: "https://control.example.com",
         accessToken: AccessToken.make("at_1"),
         refreshToken: RefreshToken.make("rt_1"),
-        expiry: Date.now() + 3600_000,
+        expiry: Date.now() + 3_600_000,
         orgID: Option.none(),
       }),
     )
@@ -143,7 +143,7 @@ it.live("list returns all accounts", () =>
         url: "https://control.example.com",
         accessToken: AccessToken.make("at_2"),
         refreshToken: RefreshToken.make("rt_2"),
-        expiry: Date.now() + 3600_000,
+        expiry: Date.now() + 3_600_000,
         orgID: Option.some(OrgID.make("org-1")),
       }),
     )
@@ -165,7 +165,7 @@ it.live("remove deletes an account", () =>
         url: "https://control.example.com",
         accessToken: AccessToken.make("at_1"),
         refreshToken: RefreshToken.make("rt_1"),
-        expiry: Date.now() + 3600_000,
+        expiry: Date.now() + 3_600_000,
         orgID: Option.none(),
       }),
     )
@@ -189,7 +189,7 @@ it.live("use stores the selected org and marks the account active", () =>
         url: "https://control.example.com",
         accessToken: AccessToken.make("at_1"),
         refreshToken: RefreshToken.make("rt_1"),
-        expiry: Date.now() + 3600_000,
+        expiry: Date.now() + 3_600_000,
         orgID: Option.none(),
       }),
     )
@@ -201,7 +201,7 @@ it.live("use stores the selected org and marks the account active", () =>
         url: "https://control.example.com",
         accessToken: AccessToken.make("at_2"),
         refreshToken: RefreshToken.make("rt_2"),
-        expiry: Date.now() + 3600_000,
+        expiry: Date.now() + 3_600_000,
         orgID: Option.none(),
       }),
     )
@@ -233,7 +233,7 @@ it.live("persistToken updates token fields", () =>
       }),
     )
 
-    const expiry = Date.now() + 7200_000
+    const expiry = Date.now() + 7_200_000
     yield* AccountRepo.Service.use((r) =>
       r.persistToken({
         accountID: id,
@@ -332,7 +332,7 @@ it.live("remove clears active state when deleting the active account", () =>
         url: "https://control.example.com",
         accessToken: AccessToken.make("at_1"),
         refreshToken: RefreshToken.make("rt_1"),
-        expiry: Date.now() + 3600_000,
+        expiry: Date.now() + 3_600_000,
         orgID: Option.some(OrgID.make("org-1")),
       }),
     )
