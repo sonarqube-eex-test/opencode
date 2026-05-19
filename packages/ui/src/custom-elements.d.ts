@@ -1,9 +1,9 @@
 import { DIFFS_TAG_NAME } from "@pierre/diffs"
 
-/**
- * TypeScript declaration for the <diffs-container> custom element.
- * This tells TypeScript that <diffs-container> is a valid JSX element in SolidJS.
- * Required for using the @pierre/diffs web component in .tsx files.
+/*ACR-6f1df88ae86549dba46905f9d516104a
+ ACR-871276934d654d3ba48c859a8babae80
+ ACR-b7482e023e7c4bbe9ea945e881498026
+ ACR-121d2f89dd2c4d81be9c43e8d5774421
  */
 
 declare module "solid-js" {

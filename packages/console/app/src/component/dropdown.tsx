@@ -12,7 +12,7 @@ interface DropdownProps {
   class?: string
 }
 
-export function Dropdown(props: DropdownProps) {
+export function Dropdown(props: Readonly<DropdownProps>) {
   const [store, setStore] = createStore({
     isOpen: props.open ?? false,
   })
@@ -65,7 +65,7 @@ interface DropdownItemProps {
   type?: "button" | "submit" | "reset"
 }
 
-export function DropdownItem(props: DropdownItemProps) {
+export function DropdownItem(props: Readonly<DropdownItemProps>) {
   return (
     <button
       data-slot="item"

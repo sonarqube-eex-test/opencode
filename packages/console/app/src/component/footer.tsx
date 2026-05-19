@@ -15,14 +15,15 @@ export function Footer() {
       : ({ key: "footer.discord", link: language.route("/discord") } as const)
   })
   const githubData = createAsync(() => github())
-  const starCount = createMemo(() =>
-    githubData()?.stars
+  const starCount = createMemo(() => {
+    const stars = githubData()?.stars
+    return stars
       ? new Intl.NumberFormat(language.tag(language.locale()), {
           notation: "compact",
           compactDisplay: "short",
-        }).format(githubData()!.stars!)
-      : config.github.starsFormatted.compact,
-  )
+        }).format(stars)
+      : config.github.starsFormatted.compact
+  })
 
   return (
     <footer data-component="footer">
