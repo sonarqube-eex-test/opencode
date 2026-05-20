@@ -8,7 +8,7 @@ export interface CheckboxProps extends ParentProps<ComponentProps<typeof Kobalte
   icon?: JSX.Element
 }
 
-export function Checkbox(props: CheckboxProps) {
+export function Checkbox(props: Readonly<CheckboxProps>) {
   const [local, others] = splitProps(props, ["children", "class", "label", "hideLabel", "description", "icon"])
   return (
     <Kobalte {...others} data-component="checkbox">

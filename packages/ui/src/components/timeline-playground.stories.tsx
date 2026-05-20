@@ -1254,8 +1254,7 @@ function Playground() {
     const asst = mkAssistant(user.message.id, session().id)
     setState(
       produce((draft) => {
-        draft.messages.push(user.message)
-        draft.messages.push(asst)
+        draft.messages.push(user.message, asst)
         draft.parts[user.message.id] = user.parts
         draft.parts[asst.id] = []
       }),
@@ -1281,8 +1280,7 @@ function Playground() {
     const asst = mkAssistant(user.message.id, session().id)
     setState(
       produce((draft) => {
-        draft.messages.push(user.message)
-        draft.messages.push(asst)
+        draft.messages.push(user.message, asst)
         draft.parts[user.message.id] = user.parts
         draft.parts[asst.id] = []
       }),
@@ -1309,8 +1307,7 @@ function Playground() {
     const asst = mkAssistant(user.message.id, session().id)
     setState(
       produce((draft) => {
-        draft.messages.push(user.message)
-        draft.messages.push(asst)
+        draft.messages.push(user.message, asst)
         draft.parts[user.message.id] = user.parts
         draft.parts[asst.id] = parts
       }),

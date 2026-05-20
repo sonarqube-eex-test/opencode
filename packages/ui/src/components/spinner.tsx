@@ -12,11 +12,11 @@ const squares = Array.from({ length: 16 }, (_, i) => ({
   corner: cornerIndices.has(i),
 }))
 
-export function Spinner(props: {
+export function Spinner(props: Readonly<{
   class?: string
   classList?: ComponentProps<"div">["classList"]
   style?: ComponentProps<"div">["style"]
-}) {
+}>) {
   return (
     <svg
       {...props}
