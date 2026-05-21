@@ -20,7 +20,7 @@ export const github = query(async () => {
     const [release] = releases
     const linkHeader = contributors.headers.get("Link")
     const contributorCount = linkHeader
-      ? Number.parseInt(linkHeader.match(/&page=(\d+)>; rel="last"/)?.at(1) ?? "0")
+      ? Number.parseInt(/&page=(\d+)>; rel="last"/.exec(linkHeader)?.at(1) ?? "0")
       : 0
     return {
       stars: meta.stargazers_count,

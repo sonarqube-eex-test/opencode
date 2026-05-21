@@ -23,7 +23,7 @@ import { useI18n } from "~/context/i18n"
 import { useLanguage } from "~/context/language"
 import "./header-context-menu.css"
 
-const isDarkMode = () => window.matchMedia("(prefers-color-scheme: dark)").matches
+const isDarkMode = () => globalThis.matchMedia("(prefers-color-scheme: dark)").matches
 
 const fetchSvgContent = async (svgPath: string): Promise<string> => {
   try {
@@ -36,7 +36,7 @@ const fetchSvgContent = async (svgPath: string): Promise<string> => {
   }
 }
 
-export function Header(props: { zen?: boolean; go?: boolean; hideGetStarted?: boolean }) {
+export function Header(props: Readonly<{ zen?: boolean; go?: boolean; hideGetStarted?: boolean }>) {
   const navigate = useNavigate()
   const i18n = useI18n()
   const language = useLanguage()
