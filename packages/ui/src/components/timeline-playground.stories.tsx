@@ -1460,18 +1460,19 @@ function Playground() {
       if (val === undefined) continue
       const value = ctrl.unit ? `${val}${ctrl.unit}` : val
       const group = ctrl.group
-      if (!groups.has(group)) groups.set(group, [])
-      groups.get(group)!.push(`/* ${ctrl.label}: ${value} */`)
-      groups.get(group)!.push(`${ctrl.selector} { ${ctrl.property}: ${value}; }`)
+      let groupRules = groups.get(group)
+      if (!groupRules) {
+        groupRules = []
+        groups.set(group, groupRules)
+      }
+      groupRules.push(`/* ${ctrl.label}: ${value} */`, `${ctrl.selector} { ${ctrl.property}: ${value}; }`)
     }
 
     if (groups.size === 0) {
       lines.push("/* No overrides applied */")
     } else {
       for (const [group, rules] of groups) {
-        lines.push(`/* --- ${group} --- */`)
-        lines.push(...rules)
-        lines.push("")
+        lines.push(`/* --- ${group} --- */`, ...rules, "")
       }
     }
 
@@ -1497,7 +1498,7 @@ function Playground() {
 
     const edits = controls.map((ctrl) => {
       const src = ctrl.source!
-      return { file: src.file, anchor: src.anchor, prop: src.prop, value: src.format(css[ctrl.key]!) }
+      return { file: src.file, anchor: src.anchor, prop: src.prop, value: src.format(css[ctrl.key]) }
     })
 
     try {
